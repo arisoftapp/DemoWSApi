@@ -1,13 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const server = express();
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const config = require('./config');
 
 server.use(cors({ credentials: true, origin: true }));
 //settings
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001; //Puerto de VIP Cell
 server.set('port', process.env.PORT || 3001);
 //server.set('secret', config.secret);
 //middleware
@@ -19,6 +20,10 @@ require ('./routes/almacen')(server);
 require ('./routes/log')(server);
 require ('./routes/user')(server);
 require ('./routes/existencia')(server);
+require ('./routes/recibido')(server); 
+require ('./routes/ajuste')(server);
+require ('./routes/busquedadesc')(server);
+require ('./routes/etiquetasmacro')(server);
 /*//Middleware to check whether you're auth - Todas las rutas arriba estan desprotegidas
 server.use(function (req, res, next) {
     // check header or url parameters or post parameters for token
@@ -49,5 +54,5 @@ server.use(function (req, res, next) {
 //require('./routes/articulo')(server);*/
 
 server.listen(server.get('port'), () => {
-    console.log("Started successfuly in the port 3001");
+    console.log("DemoWS Started successfuly in the port 3001");
 });
